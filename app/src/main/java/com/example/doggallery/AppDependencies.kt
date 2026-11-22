@@ -16,8 +16,7 @@ object AppDependencies {
 
     private const val BASE_URL = "https://api.thedogapi.com/v1/"
 
-    /** Необязательный ключ с https://thedogapi.com. Пустая строка: запросы без ключа. */
-    private const val API_KEY = ""
+    private const val API_KEY = "live_h0c9T2FylZ3TheToSaSMZTZbsXj5vXhzmUJNc6RB3J0Br9LHYcdApERUfsKEgV8A"
 
     private lateinit var appContext: Context
 
