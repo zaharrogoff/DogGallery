@@ -5,7 +5,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation3.runtime.entryProvider
 import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.ui.NavDisplay
+import com.example.doggallery.ui.breedDetailsFactory
 import com.example.doggallery.ui.breedListFactory
+import com.example.doggallery.ui.details.BreedDetailsScreen
+import com.example.doggallery.ui.details.BreedDetailsViewModel
 import com.example.doggallery.ui.list.BreedListScreen
 import com.example.doggallery.ui.list.BreedListViewModel
 
@@ -21,8 +24,18 @@ fun AppNavigation() {
                 val viewModel: BreedListViewModel = viewModel(factory = breedListFactory())
                 BreedListScreen(
                     viewModel = viewModel,
-                    onBreedClick = {},
+                    onBreedClick = { id -> backStack.add(BreedDetailsKey(id)) },
                     onFavoritesClick = {}
+                )
+            }
+            entry<BreedDetailsKey> { key ->
+                val viewModel: BreedDetailsViewModel = viewModel(
+                    key = "details_${key.breedId}",
+                    factory = breedDetailsFactory(key.breedId)
+                )
+                BreedDetailsScreen(
+                    viewModel = viewModel,
+                    onBack = { backStack.removeLastOrNull() }
                 )
             }
         }
