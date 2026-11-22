@@ -4,6 +4,7 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.doggallery.AppDependencies
 import com.example.doggallery.ui.details.BreedDetailsViewModel
+import com.example.doggallery.ui.favorites.FavoritesViewModel
 import com.example.doggallery.ui.list.BreedListViewModel
 
 fun breedListFactory() = viewModelFactory {
@@ -12,4 +13,8 @@ fun breedListFactory() = viewModelFactory {
 
 fun breedDetailsFactory(breedId: Int) = viewModelFactory {
     initializer { BreedDetailsViewModel(AppDependencies.repository, breedId) }
+}
+
+fun favoritesFactory() = viewModelFactory {
+    initializer { FavoritesViewModel(AppDependencies.repository) }
 }

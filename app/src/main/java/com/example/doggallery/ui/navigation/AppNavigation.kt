@@ -9,6 +9,9 @@ import com.example.doggallery.ui.breedDetailsFactory
 import com.example.doggallery.ui.breedListFactory
 import com.example.doggallery.ui.details.BreedDetailsScreen
 import com.example.doggallery.ui.details.BreedDetailsViewModel
+import com.example.doggallery.ui.favorites.FavoritesScreen
+import com.example.doggallery.ui.favorites.FavoritesViewModel
+import com.example.doggallery.ui.favoritesFactory
 import com.example.doggallery.ui.list.BreedListScreen
 import com.example.doggallery.ui.list.BreedListViewModel
 
@@ -25,7 +28,7 @@ fun AppNavigation() {
                 BreedListScreen(
                     viewModel = viewModel,
                     onBreedClick = { id -> backStack.add(BreedDetailsKey(id)) },
-                    onFavoritesClick = {}
+                    onFavoritesClick = { backStack.add(FavoritesKey) }
                 )
             }
             entry<BreedDetailsKey> { key ->
@@ -35,6 +38,14 @@ fun AppNavigation() {
                 )
                 BreedDetailsScreen(
                     viewModel = viewModel,
+                    onBack = { backStack.removeLastOrNull() }
+                )
+            }
+            entry<FavoritesKey> {
+                val viewModel: FavoritesViewModel = viewModel(factory = favoritesFactory())
+                FavoritesScreen(
+                    viewModel = viewModel,
+                    onBreedClick = { id -> backStack.add(BreedDetailsKey(id)) },
                     onBack = { backStack.removeLastOrNull() }
                 )
             }
